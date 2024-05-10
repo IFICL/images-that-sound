@@ -1,8 +1,11 @@
 # Images that Sound
 
 [Ziyang Chen](https://ificl.github.io/), [Daniel Geng](https://dangeng.github.io/),  [Andrew Owens](https://andrewowens.com/)
+
 University of Michigan, Ann Arbor
+
 arXiv 2024
+
 [[Paper]()] [[Project Page](https://ificl.github.io/images-that-sound/)]
 <hr>
 
