@@ -1,0 +1,50 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+# this allows you to overwrite only specified parameters
+
+task_name: 'soundify-sds/examples/kitten'
+
+seed: 1234
+
+trainer:
+  num_iteration: 40000
+  batch_size: 8
+  save_step: 50000
+  visualize_step: 10000
+  accumulate_grad_batches: 1
+
+  use_colormap: true
+  crop_image: true
+
+  # image guidance
+  image_prompt: 'a painting of furry kittens, grayscale'
+  image_start_step: 5000
+  image_guidance_scale: 80
+  image_weight: 0.4
+
+  # audio guidance
+  audio_prompt: 'a kitten meowing for attention'
+  audio_guidance_scale: 10
+  audio_weight: 1
+
+image_learner:
+  _target_: src.models.components.learnable_image.LearnableImageFourier
+  height: 256
+  width: 1024
+  num_channels: 1
+
+audio_transformation:
+  _target_: src.transformation.img_to_spec.ImageToSpec
+  inverse: false
+  flip: false
+  rgb2gray: mean
+
+image_diffusion_guidance:
+  _target_: src.guidance.deepfloyd.DeepfloydGuidance
+  repo_id: DeepFloyd/IF-I-M-v1.0
+  fp16: true
+  t_consistent: true
+  t_range: [0.02, 0.98]

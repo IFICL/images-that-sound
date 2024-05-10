@@ -1,0 +1,80 @@
+defaults:
+  - _self_
+  - hydra: default
+  # experiment configs allow for version control of specific hyperparameters
+  # e.g. best hyperparameters for given model and datamodule
+  - experiment: null
+  - debug: null
+
+seed: 2024
+log_dir: 'logs'
+output_dir: ${log_dir}/${task_name}
+task_name: 'soundify-sds'
+
+trainer:
+  num_iteration: 40000
+  batch_size: 8
+  save_step: 50000
+  visualize_step: 10000
+  accumulate_grad_batches: 1
+
+  use_colormap: false
+  crop_image: false
+
+  # image guidance
+  image_prompt: 'a painting of castle towers, grayscale'
+  image_start_step: 5000
+  image_guidance_scale: 80
+  image_weight: 0.4
+
+  # audio guidance
+  audio_prompt: 'bell ringing'
+  audio_guidance_scale: 10
+  audio_weight: 1
+
+
+image_learner:
+  _target_: src.models.components.learnable_image.LearnableImageFourier
+  height: 256
+  width: 1024
+  num_channels: 3
+
+
+audio_diffusion_guidance:
+  _target_: src.guidance.auffusion.AuffusionGuidance
+  repo_id: auffusion/auffusion-full-no-adapter
+  fp16: True
+  t_range: [0.02, 0.98]
+
+audio_transformation:
+  _target_: src.transformation.img_to_spec.ImageToSpec
+  inverse: false
+  flip: false
+  rgb2gray: mean
+
+
+image_diffusion_guidance:
+  _target_: src.guidance.deepfloyd.DeepfloydGuidance
+  repo_id: DeepFloyd/IF-I-M-v1.0
+  fp16: true
+  t_consistent: true
+  t_range: [0.02, 0.98]
+
+image_transformation:
+  _target_: src.transformation.random_crop.ImageRandomCropper
+  size: [256, 256]
+  n_view: ${trainer.batch_size}
+
+
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 0.0001
+  weight_decay: 0.001
+
+extras:
+  ignore_warnings: true
+  print_config: true
+
+
+

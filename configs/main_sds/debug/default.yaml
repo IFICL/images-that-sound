@@ -1,0 +1,20 @@
+# @package _global_
+
+# default debugging setup, runs 1 full epoch
+# other debugging configs can inherit from this one
+
+# overwrite task name so debugging logs are stored in separate folder
+task_name: "debug"
+
+hydra:
+  job_logging:
+    root:
+      level: DEBUG
+
+extras:
+  ignore_warnings: false
+
+trainer:
+  num_iteration: 10
+  save_step: 1
+  visualize_step: 1

@@ -1,0 +1,70 @@
+defaults:
+  - _self_
+  - hydra: default
+  # experiment configs allow for version control of specific hyperparameters
+  # e.g. best hyperparameters for given model and datamodule
+  - experiment: null
+  - debug: null
+
+seed: 2024
+log_dir: 'logs'
+task_name: 'soundify-imprint'
+output_dir: ${log_dir}/${task_name}
+
+trainer:
+  num_samples: 5
+  num_inference_steps: 100
+  img_height: 256
+  img_width: 1024
+
+  mag_ratio: 0.5
+  inverse_image: true
+  crop_image: false
+  use_colormap: true
+
+  enable_rank: False
+  enable_clip_rank: False
+  top_ranks: 0.2
+
+  # image guidance
+  image_prompt: 'a castle with bell towers, grayscale, lithograph style'
+  image_neg_prompt: ''
+  image_guidance_scale: 7.5
+  image_start_step: 0
+
+  # audio guidance
+  audio_prompt: 'bell ringing'
+  audio_neg_prompt: ''
+  audio_guidance_scale: 7.5
+  audio_start_step: 0
+  audio_weight: 0.5
+
+audio_diffusion_guidance:
+  _target_: src.guidance.auffusion.AuffusionGuidance
+  repo_id: auffusion/auffusion-full-no-adapter
+  fp16: True
+  t_range: [0.02, 0.98]
+
+image_diffusion_guidance:
+  _target_: src.guidance.stable_diffusion.StableDiffusionGuidance
+  repo_id: runwayml/stable-diffusion-v1-5
+  fp16: True
+  t_consistent: True
+  t_range: [0.02, 0.98]
+
+
+latent_transformation: 
+  _target_: src.transformation.identity.NaiveIdentity
+
+audio_evaluator: 
+  _target_: src.evaluator.clap.CLAPEvaluator
+
+visual_evaluator:
+  _target_: src.evaluator.clip.CLIPEvaluator
+
+extras:
+  ignore_warnings: true
+  print_config: true
+
+
+

@@ -1,0 +1,65 @@
+# reasons you might want to use `environment.yml` instead of `requirements.txt`:
+# - pip installs packages in a loop, without ensuring dependencies across all packages
+#   are fulfilled simultaneously, but conda achieves proper dependency control across
+#   all packages
+# - conda allows for installing packages without requiring certain compilers or
+#   libraries to be available in the system, since it installs precompiled binaries
+
+name: soundify
+
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+  - huggingface
+  - nvidia
+
+# it is strongly recommended to specify versions of packages installed through conda
+# to avoid situation when version-unspecified packages install their latest major
+# versions which can sometimes break things
+
+# current approach below keeps the dependencies in the same major versions across all
+# users, but allows for different minor and patch versions of packages where backwards
+# compatibility is usually guaranteed
+
+dependencies:
+  - python=3.10
+  - pytorch=2.1.2
+  - torchvision=0.16
+  - torchaudio=2.1.2
+  - pytorch-cuda=12.1
+  - lightning=2.2.0
+  - torchmetrics=1.*
+  - hydra-core=1.3
+  - rich=13.*
+  # - pre-commit=3.*
+  # - pytest=7.*
+  - diffusers=0.25.*
+  - transformers=4.36.*
+  - pysoundfile=0.12.1
+  - kornia=0.7.0
+  - tensorboard=2.15.1
+  - accelerate
+  - librosa
+
+  - matplotlib # need to include this package in the yml file else the conda is not able to solve the conflict. this will significantly slow down the speed, remove it if you don't need 
+  - moviepy
+  - imagemagick
+
+
+  # --------- loggers --------- #
+  # - wandb
+  # - neptune-client
+  # - mlflow
+  # - comet-ml
+  # - aim>=3.16.2 # no lower than 3.16.2, see https://github.com/aimhubio/aim/issues/2550
+
+  - pip>=23
+  - pip:
+      - hydra-optuna-sweeper
+      - hydra-colorlog
+      - rootutils
+      - gpustat
+      - nvitop
+      - sentencepiece==0.2.0
+      - bitsandbytes==0.43.1

@@ -1,0 +1,38 @@
+# @package _global_
+
+# to execute this experiment run:
+# python train.py experiment=example
+
+# this allows you to overwrite only specified parameters
+
+task_name: 'soundify-denoise/examples/train'
+
+seed: 1234
+
+trainer:
+  num_samples: 100
+  num_inference_steps: 100
+  img_height: 256
+  img_width: 1024
+
+  cutoff_latent: false
+  crop_image: true
+  use_colormap: true
+  
+  enable_clip_rank: false
+  # enable_rank: True
+  top_ranks: 0.2
+
+  # image guidance
+  image_prompt: 'a painting of trains, grayscale'
+  image_guidance_scale: 10
+  image_start_step: 10
+
+  # audio guidance
+  audio_prompt: 'train whistling'
+  audio_guidance_scale: 10
+  audio_start_step: 0
+  audio_weight: 0.5
+
+latent_transformation:
+  _target_: src.transformation.identity.NaiveIdentity
