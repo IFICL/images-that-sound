@@ -6,7 +6,7 @@ University of Michigan, Ann Arbor
 
 arXiv 2024
 
-[[Paper]()] [[Project Page](https://ificl.github.io/images-that-sound/)]
+[[Paper](https://arxiv.org/abs/2405.12221)] [[Project Page](https://ificl.github.io/images-that-sound/)]
 <hr>
 
 This repository contains the code to generate *images that sound*, a special spectrogram that can be seen as images and played as sound.
