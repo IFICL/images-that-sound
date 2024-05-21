@@ -1,6 +1,0 @@
-@inproceedings{
-    chen2024soundify,
-    title={Images that Sound: Multimodal AI Art},
-    author={Chen, Ziyang and Owens, Andrew},
-    year={2024}
-}
