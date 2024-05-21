@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Images that Sound: Multimodal AI Art">
+  <meta name="keywords" content="AI Art, Generative Model, Audio-Visual Learning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Images that Sound</title>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <!-- <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+    function setupVideos() {
+      for (const video of document.querySelectorAll('.sounding-image')) {
+        video.controls = false
+        video.addEventListener('mouseover', () => { video.controls = 'controls' })
+        video.addEventListener('mouseout', () => { video.controls = false })
+      }
+    }
+    window.addEventListener('load', setupVideos, false)
+  </script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-3 publication-title">Images that Sound:<br>Composing Images and Sounds on a Single Canvas</h1>
+            <h2 class="title is-5 publication-title"> arXiv 2024 </h2>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block" style="margin: 0 1rem;">
+                <a href="https://ificl.github.io/" target="_blank">Ziyang Chen</a></span>
+              <span class="author-block" style="margin: 0 1rem;">
+                <a href="https://dangeng.github.io/" target="_blank">Daniel Geng</a></span>
+              <span class="author-block" style="margin: 0 1rem;">
+                <a href="https://andrewowens.com" target="_blank">Andrew Owens</a></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">University of Michigan</span>
+            </div>
+            
+            <div class="is-size-6 publication-authors">
+              <span class="author-block">Correspondence to: <span class='rev'>ude.hcimu@gnayzc</span></span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                
+                <!- - arXiv Link. - ->
+                <span class="link-block">
+                  <a href="" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+
+                <!-- Video Link. -->
+                
+                <!-- <span class="link-block">
+                  <a href="#"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video (Coming Soon)</span>
+                  </a>
+                </span> -->
+
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/IFICL/images-that-sound" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                
+                <!-- Bibtex. -->
+                <span class="link-block">
+                  <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-book"></i>
+                    </span>
+                    <span>BibTex</span>
+                  </a>
+                </span>
+              </div>
+
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TEASER + INTRO -->
+  <section class="hero teaser" style="margin-top: -30px;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <!-- First column in its own row -->
+        <div class="column is-three-fifths">
+          <h3 class="subtitle has-text-centered">
+            <b>tl;dr:</b> We use diffusion models to generate spectrograms that look like images but can also be played as sound.
+          </h3>
+        </div>
+      </div>
+      <!-- Second column in a separate row -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <div class="is-centered is-max-desktop teaser">
+            <div>
+              <video class="center-video" autoplay muted loop playsinline style="margin: 1em auto 0 auto;">
+                <source src="./static/videos/teaser.mp4" type="video/mp4">
+              </video>
+              <p style="font-size: 9pt; width: 75%; margin: 0 auto;">
+                Note the above teaser is muted. For examples with sound, please see our <a href="#gallery">gallery</a> below.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- OVERVIEW -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Overview</h2>
+          <div class="content has-text-justified">
+            <p>
+              Spectrograms are 2D representations of sound that look very different from the images found in our visual world. And
+              natural images, when played as spectrograms, make unnatural sounds. In this paper, we show that it is possible to
+              synthesize spectrograms that simultaneously look like natural images and sound like natural audio. We call these
+              spectrograms <strong>images that sound</strong>. Our approach is simple and zero-shot, and it leverages pre-trained
+              text-to-image and text-to-spectrogram diffusion models that operate in a shared latent space. During the reverse
+              process, we denoise noisy latents with both the audio and image diffusion models in parallel, resulting in a sample that
+              is likely under both models. Through quantitative evaluations and perceptual studies, we find that our method
+              successfully generates spectrograms that align with a desired audio prompt while also taking the visual appearance of a
+              desired image prompt. 
+            </p>
+            <p>
+              We describe our <a href="#method">method</a> in more detail and show examples in our <a href="#gallery">gallery</a> below.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="section" style="margin-top: -30px;">
+    <div class="container is-max-desktop">
+      <!-- Paper video. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" id="gallery">Gallery</h2>
+          <!-- <br> -->
+          <div class="content is-centered has-text-centered">
+            <p style="margin-bottom: 10px; font-family: cursive; font-size: 20px;">Play the video to hear the audio!</p>
+          </div>
+
+          <h2 class="title is-4" id="gallery">Colorful <em>Images that Sound</em></h2>
+          
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="corgi-color" controls playsinline>
+              <source src="./static/videos/color/corgi.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="bell-color" controls playsinline>
+              <source src="./static/videos/color/bell.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+          
+          <div class="columns is-centered">
+            <video class="sounding-image" id="tiger-color" preload="metadata" controls playsinline>
+              <source src="./static/videos/color/tiger.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="pond-color" controls playsinline>
+              <source src="./static/videos/color/pond.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="garden-color" controls playsinline>
+              <source src="./static/videos/color/garden.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="dog-color" controls playsinline>
+              <source src="./static/videos/color/dog.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="race-color" controls playsinline>
+              <source src="./static/videos/color/race.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <br>
+          
+          <br>
+          <h2 class="title is-4" id="gallery">Grayscale <em>Images that Sound</em></h2>
+          
+          <div class="columns is-centered">
+            <video class="sounding-image" id="bell-gray" controls playsinline>
+              <source src="./static/videos/grayscale-merged/bell.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="garden-gray" controls playsinline>
+              <source src="./static/videos/grayscale-merged/garden.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+          
+          <div class="columns is-centered">
+            <video class="sounding-image" id="horse-gray" controls playsinline>
+              <source src="./static/videos/grayscale-merged/horse.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="dog-gray" controls playsinline>
+              <source src="./static/videos/grayscale-merged/dog.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+          
+          <div class="columns is-centered">
+            <video class="sounding-image" id="kitten-gray" controls playsinline>
+              <source src="./static/videos/grayscale-merged/kitten.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+          
+          <div class="columns is-centered">
+            <video class="sounding-image" id="train-gray" controls playsinline>
+              <source src="./static/videos/grayscale-merged/train.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="tiger-gray" controls playsinline>
+              <source src="./static/videos/grayscale-merged/tiger.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="race-gray" controls playsinline>
+              <source src="./static/videos/grayscale-merged/race.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="random-gray-01" controls playsinline>
+              <source src="./static/videos/grayscale-merged/random-01.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <div class="columns is-centered">
+            <video class="sounding-image" id="random-gray-02" controls playsinline>
+              <source src="./static/videos/grayscale-merged/random-02.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+          
+          <div class="columns is-centered">
+            <video class="sounding-image" id="random-gray-03" controls playsinline>
+              <source src="./static/videos/grayscale-merged/random-03.mp4#t=0.0001" type="video/mp4">
+            </video>
+          </div>
+          <!-- <br> -->
+
+          <!-- <div class="content is-centered has-text-centered">
+            <p style="margin-top: 30px; font-family: cursive; font-size: 20px;">More videos will be coming soon!</p>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- METHOD -->
+  <section class="section" style="margin-top: -30px;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3 has-text-centered" id="method">Method</h2>
+          <div class="content has-text-justified">
+
+              <img src="./static/images/method.jpg" class="center-img" style="max-width: 650px; margin-bottom: 30px;"/>
+
+            <p>
+              We pose the problem of generating <em>images that sound</em> as a multimodal composition problem:
+              our goal is to obtain a sample that is likely under both the distribution of images and the distribution of spectrograms.
+              To do this, we simultaneously denoise using an image diffusion model and an audio diffusion model.
+              Given a noisy latent \(\mathbf{z}_t\), we compute two text-conditioned noise estimates \(\boldsymbol{\epsilon}_{v}^{(t)}\) and
+              \(\boldsymbol{\epsilon}_{a}^{(t)}\). One for each modality. We then obtain a multimodal noise estimate
+              \(\tilde{\boldsymbol{\epsilon}}^{(t)}\) via weighted averaging, which we then use to denoise. 
+              Repeating this process iteratively results in a clean latent \(\mathbf{z}_0\). Finally, we decode this clean
+              latent to a spectrogram and convert it into a waveform using a pretrained vocoder.
+              As we only change the inference time procedure, our method is zero-shot, requiring no training or fine-tuning.
+            </p>
+
+            <div>
+              <video class="center-video" autoplay muted loop playsinline style="max-width: 700px; margin: 1em auto 0 auto;">
+                <source src="./static/videos/denoise.mp4" type="video/mp4">
+              </video>
+              <p style="font-size: 9pt; width: 75%; margin: 0 auto;">
+                Iteratively denoising using both a spectrogram diffusion model 
+                and an image diffusion model. See <a href="#gallery">above</a> 
+                for videos with sound.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section" style="margin-top: -30px;">
+    <div class="container is-max-desktop">
+      <!-- Concurrent Work. -->
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Related Links and Works</h2>
+  
+          <div class="content has-text-justified">
+            <p>
+              <a href="https://mixmag.net/feature/spectrogram-art-music-aphex-twin" target="_blank">Spectrogram Art</a>, 
+              by <a href="https://www.instagram.com/beckybuckle/" target="_blank">Becky Buckle</a>: an article about the 
+              history of artists concealing images in the spectrogram of their music.
+            </p>
+            <p>
+              <a href="https://github.com/LeviBorodenko/spectrographic" target="_blank">SpectroGraphic</a>, 
+              by <a href="https://github.com/LeviBorodenko" target="_blank">Levi Borodenko</a>:
+              a tool to turn images into spectrograms and recover the corresponding audio.
+            </p>
+            <p>
+              <a href="https://energy-based-model.github.io/Compositional-Visual-Generation-with-Composable-Diffusion-Models/" target="_blank">Composable Diffusion</a>,
+              by <a href="https://nanliu.io/" target="_blank">Liu</a> <i>et al.</i>,
+              which originally showed how to compose image diffusion models together.
+            </p>
+            <p>
+              <a href="https://dangeng.github.io/visual_anagrams/" target="_blank">Visual Anagrams</a>,
+              by <a href="https://dangeng.github.io/" target="_blank">Geng</a> <i>et al.</i>,
+              which uses pretrained diffusion models and compositionality to make multi-view optical illusions.
+            </p>
+            <p>
+              <a href="https://dangeng.github.io/factorized_diffusion/" target="_blank">Factorized Diffusion</a>,
+              by <a href="https://dangeng.github.io/" target="_blank">Geng</a> <i>et al.</i>,
+              which generates various perceptual illusions via decomposition with diffusion models. We use
+              their code the colorize the spectrograms.
+            </p>
+            <p>
+              <a href="https://diffusionillusions.com/" target="_blank">Diffusion Illusions</a>,
+              by <a href="https://ryanndagreat.github.io/" target="_blank">Burgert</a> <i>et al.</i>,
+              which produces multi-view illusions, along with other visual effects, through score distillation sampling.
+              We adapt their code to make an SDS style baseline for generating images that sound.
+            </p>
+            
+          </div>
+        </div>
+      </div>
+      <!--/ Concurrent Work. -->
+  
+    </div>
+  </section>
+
+
+  <section class="section" id="BibTeX" style="margin-top: -30px;">
+    <div class="container is-max-desktop content">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>@article{chen2024soundify,
+  title     = {Images that Sound: Composing Images and Sounds on a Single Canvas},
+  author    = {Chen, Ziyang and Geng, Daniel and Owens, Andrew},
+  year      = {2024},
+  url       = {https://ificl.github.io/images-that-sound/},
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer class="footer">
+    <div class="container is-max-desktop">
+      <div class="content has-text-centered">
+        <!-- <a class="icon-link" href="https://arxiv.org/pdf/2303.11329.pdf">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="https://github.com/IFICL" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a> -->
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content">
+            
+            <p>
+              This website is licensed under a 
+              <a rel="license" 
+              href="http://creativecommons.org/licenses/by-sa/4.0/"
+              target="_blank">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>, 
+              and is written by <a href="https://keunhong.com/" target="_blank">
+              Keunhong Park</a> for the <a href="https://nerfies.github.io/" 
+              target="_blank">Nerfies</a> project. You are free to use the 
+              <a href="https://github.com/nerfies/nerfies.github.io"
+              target="_blank">source code</a> of this website,
+              but please keep these links in the footer, 
+              as requested by the authors.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
