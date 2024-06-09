@@ -8,7 +8,7 @@ class NaiveIdentity(nn.Module):
         self,
         **kwargs
     ):
-        '''We implement an easy block rearrange operation
+        '''We implement an identity transformation to support our code
         '''
         super().__init__()
     
