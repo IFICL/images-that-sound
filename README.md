@@ -4,7 +4,7 @@
 
 University of Michigan, Ann Arbor
 
-arXiv 2024
+NeuriPS 2024
 
 [[Paper](https://arxiv.org/abs/2405.12221)] [[Project Page](https://ificl.github.io/images-that-sound/)]
 <hr>
